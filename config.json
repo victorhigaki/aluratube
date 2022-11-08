@@ -129,5 +129,13 @@
                 "thumb": "https://img.youtube.com/vi/0JWMVc1CqpA/hqdefault.jpg"
             }
         ]
-    }
+    },
+    "favoritos": [
+        {
+            "user": "peas"
+        },
+        {
+            "user": "omariosouto"
+        }
+    ]
 }

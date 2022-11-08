@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { CSSReset } from '../src/components/CSSReset';
 import Menu from "../src/components/Menu";
 import { StyledTimeline } from "../src/components/Timeline";
+import Favoritos from "../src/components/Favoritos";
 
 function HomePage() {
     return (
@@ -19,6 +20,7 @@ function HomePage() {
                 <Timeline playlists={config.playlists}>
                     Conteúdo
                 </Timeline>
+                <Favoritos />
             </div>
         </>
     );
@@ -30,12 +32,17 @@ export default HomePage
 
 const StyledHeader = styled.div`
     img {
+        width: 100%;
+        height: 230px;
+        object-fit: cover;
+    }
+
+    .user-info > img {
         width: 80px;
         height: 80px;
         border-radius: 50%;
     }
     .user-info {
-        margin-top: 50px;
         display: flex;
         align-items: center;
         width: 100%;
@@ -46,7 +53,7 @@ const StyledHeader = styled.div`
 function Header() {
     return (
         <StyledHeader>
-            {/* <img src="banner" /> */}
+            <img className="banner" src="/images/michael-dziedzic-aQYgUYwnCsM-unsplash.jpg" alt="banner" />
             <section className="user-info">
                 <img src={`https://github.com/${config.github}.png`} />
                 <div>
@@ -58,7 +65,7 @@ function Header() {
                     </p>
                 </div>
             </section>
-        </StyledHeader>
+        </StyledHeader >
     )
 }
 
@@ -69,14 +76,13 @@ function Timeline(propriedades) {
         <StyledTimeline>
             {playlistNames.map((playlistName) => {
                 const videos = propriedades.playlists[playlistName];
-                console.log(videos)
                 return (
-                    <section>
+                    <section key={playlistName}>
                         <h2>{playlistName}</h2>
                         <div>
                             {videos.map((video) => {
                                 return (
-                                    <a href={video.url}>
+                                    <a key={video.url} href={video.url}>
                                         <img src={video.thumb} />
                                         <span>
                                             {video.title}
