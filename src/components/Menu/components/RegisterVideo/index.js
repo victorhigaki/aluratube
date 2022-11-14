@@ -1,4 +1,5 @@
 import React from "react";
+import { videoService } from "../../../../services/videoService";
 import { StyledRegisterVideo } from "./styles";
 
 function useForm(propsDoForm) {
@@ -22,9 +23,10 @@ function useForm(propsDoForm) {
 
 export default function RegisterVideo() {
     const formCadastro = useForm({
-        initialValues: { titulo: "Frost punk", url: "https://youtube.." }
+        initialValues: { titulo: "Frost punk", url: "https://www.youtube.com/watch?v=QsqatJxAUtk" }
     });
     const [formVisivel, setFormVisivel] = React.useState(false);
+    const service = videoService();
 
     return (
         <StyledRegisterVideo>
@@ -35,6 +37,9 @@ export default function RegisterVideo() {
                 ? (
                     <form onSubmit={(evento) => {
                         evento.preventDefault();
+
+                        service.insert(formCadastro);
+
                         setFormVisivel(false);
                         formCadastro.clearForm();
                     }}>
